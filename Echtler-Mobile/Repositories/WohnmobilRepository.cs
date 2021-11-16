@@ -25,7 +25,14 @@ namespace Echtler_Mobile.Repositories
         public async Task Delete(int id)
         {
             var recordsToDelete = await _context.Wohnmobile.FindAsync(id);
-            _ = _context.Wohnmobile.Remove(recordsToDelete) ?? throw new ArgumentNullException();
+            if (recordsToDelete != null)
+            {
+                _context.Wohnmobile.Remove(recordsToDelete);
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
             await _context.SaveChangesAsync();
         }
 

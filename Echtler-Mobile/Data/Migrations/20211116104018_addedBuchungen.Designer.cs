@@ -4,6 +4,7 @@ using Echtler_Mobile.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Echtler_Mobile.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211116104018_addedBuchungen")]
+    partial class addedBuchungen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,55 +259,25 @@ namespace Echtler_Mobile.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("WohnmobilID")
+                    b.Property<int>("WohnmobilId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Buchungen");
-                });
-
-            modelBuilder.Entity("Echtler_Mobile.Models.PricingSeason", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
+                    b.Property<float>("price")
                         .HasColumnType("real");
 
-                    b.Property<int>("SeaonTable")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
-                    b.ToTable("PricingSeasons");
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("WohnmobilId");
+
+                    b.ToTable("Buchungen");
                 });
 
             modelBuilder.Entity("Echtler_Mobile.Models.Wohnmobil", b =>
@@ -462,6 +434,23 @@ namespace Echtler_Mobile.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Echtler_Mobile.Models.Buchung", b =>
+                {
+                    b.HasOne("Echtler_Mobile.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("Echtler_Mobile.Models.Wohnmobil", "Wohnmobil")
+                        .WithMany()
+                        .HasForeignKey("WohnmobilId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("Wohnmobil");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

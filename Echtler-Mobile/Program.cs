@@ -18,12 +18,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "You api title", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Echtler-Mobile-Api Documentation", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
-                      Enter 'Bearer' [space] and then your token in the text input below.
-                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+        Description = "Place your Bearer Token here:",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
@@ -58,6 +56,8 @@ builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
 builder.Services.AddScoped<IWohnmobilRepository, WohnmobilRepository>();
+builder.Services.AddScoped<IBuchungRepository, BuchungRepository>();
+builder.Services.AddScoped<IPricingSeasonRepository, PricingSeasonRepository>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();

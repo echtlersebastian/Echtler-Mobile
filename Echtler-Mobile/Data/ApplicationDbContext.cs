@@ -15,5 +15,7 @@ namespace Echtler_Mobile.Data
         }
 
         public DbSet<Wohnmobil> Wohnmobile { get; set; }
+        public DbSet<Buchung> Buchungen { get; set; }
+        public DbSet<PricingSeason> PricingSeasons { get; set; }
     }
 }

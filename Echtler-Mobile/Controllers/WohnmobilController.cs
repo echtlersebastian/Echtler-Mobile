@@ -18,7 +18,7 @@ namespace Echtler_Mobile.Controllers
         }
 
         // GET: WohnmobilController/Details/5
-        [Route("api/Wohnmobil/details")]
+        [Route("api/Wohnmobil/Details")]
         [HttpGet]
         public async Task<ActionResult<Wohnmobil>> Details(int id)
         {
