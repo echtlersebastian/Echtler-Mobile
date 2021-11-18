@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
+import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import Home from './components/Home';
@@ -12,6 +13,7 @@ import Extras from './components/ModalPages/Extras';
 
 
 import Ausstattung from './components/ModalPages/Ausstattung/Ausstattung';
+import { FetchData } from './components/FetchData';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -26,7 +28,8 @@ export default class App extends Component {
             <Route path="/Ausstattung" exact component={Ausstattung} />
             <Route path="/Extras" exact component={Extras} />
             <Route path="/Agb" exact component={Agb} />
-            <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+            <Route path="/fetch-data" exact component={FetchData} />
+        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
   }

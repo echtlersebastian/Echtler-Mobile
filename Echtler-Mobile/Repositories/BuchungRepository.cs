@@ -12,7 +12,6 @@ namespace Echtler_Mobile.Repositories
         {
             _context = context;
         }
-
         public async Task<Buchung> CreateBuchung(Buchung buchung)
         {
             buchung.Id = 0;
@@ -63,6 +62,7 @@ namespace Echtler_Mobile.Repositories
             return buchung;
         }
 
+       
         public float calculatePrice(DateTime start, DateTime end)
         {
             var DatesArray = Enumerable.Range(0, 1 + end.Subtract(start).Days)
@@ -77,6 +77,7 @@ namespace Echtler_Mobile.Repositories
                     currentPrice += pricingSeason.First().Price;
 
                 }
+                //todo: handle this. should not be something else than 1
             }
             return currentPrice;
 

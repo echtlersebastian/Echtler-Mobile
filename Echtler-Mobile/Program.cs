@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -58,6 +59,7 @@ builder.Services.AddIdentityServer()
 builder.Services.AddScoped<IWohnmobilRepository, WohnmobilRepository>();
 builder.Services.AddScoped<IBuchungRepository, BuchungRepository>();
 builder.Services.AddScoped<IPricingSeasonRepository, PricingSeasonRepository>();
+builder.Services.AddScoped<ICalendarRepository, CalendarRepository>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
