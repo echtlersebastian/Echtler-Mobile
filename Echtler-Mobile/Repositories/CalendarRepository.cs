@@ -26,12 +26,11 @@ namespace Echtler_Mobile.Repositories
             {
                 return false;
             }
-
-
-
         }
         public List<DateTime> getAllBookedDates()
         {
+            //Todo: Check if bookings can overlap
+            //Todo: What happens, if i have 2 Wohnmobils?
             var allBookings = _context.Buchungen.Where(x => x.EndDate <= DateTime.Now.AddYears(2)) ;
             var bookedDates = new List<DateTime>();
 
@@ -42,10 +41,7 @@ namespace Echtler_Mobile.Repositories
                     bookedDates.Add(dt.Date);
                 }
             }
-
             return bookedDates.Distinct().ToList() ;
-
-
         }
         public bool isDateRangeAvailable(DateTime startdate, DateTime enddate)
         {

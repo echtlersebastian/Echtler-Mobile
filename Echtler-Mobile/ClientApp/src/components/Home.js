@@ -20,9 +20,15 @@ function Home() {
                      spacing={0}
                      direction="column"
                      alignItems="center"
-                     justifyContent="center"
-                     style={{ minHeight: '30vh' }}>
-                        <Calendar></Calendar>
+                     justifyContent="center">
+
+                    <Grid item xs={false} md={1} lg={2}></Grid>
+
+                    <Grid item xs={12} md={10} lg={8}><Calendar></Calendar></Grid>
+
+                    <Grid item xs={false} md={1} lg={2}></Grid>
+                    
+
                     </Grid>
                     {/* Hier unser Angebot */}
                     <Grid item container alignItems="center" justify="center">
