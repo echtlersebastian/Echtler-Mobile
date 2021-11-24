@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Offer from '../components/Offers/Offers'
 import Posibilities from '../components/Possibilities/Posibilities'
 import TimeLine from '../components/Timeline/TimeLine';
+import Calendar from '../components/Calendar/Calendar';
 
 function Home() {
 
@@ -14,6 +15,15 @@ function Home() {
                 <Grid item xs={12}>
                     <Landing2/>
                 </Grid>
+                    <Grid
+                     container
+                     spacing={0}
+                     direction="column"
+                     alignItems="center"
+                     justifyContent="center"
+                     style={{ minHeight: '30vh' }}>
+                        <Calendar></Calendar>
+                    </Grid>
                     {/* Hier unser Angebot */}
                     <Grid item container alignItems="center" justify="center">
                         <Grid item xs={false} md={1} lg={2}></Grid>

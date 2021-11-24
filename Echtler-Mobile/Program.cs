@@ -53,7 +53,10 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddIdentityServer()
+builder.Services.AddIdentityServer(options =>
+{
+    options.IssuerUri = "https://localhost:44412/";
+})
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
 builder.Services.AddScoped<IWohnmobilRepository, WohnmobilRepository>();

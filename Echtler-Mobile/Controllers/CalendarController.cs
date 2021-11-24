@@ -15,11 +15,27 @@ namespace Echtler_Mobile.Controllers
         {
             _calendarRepository = calendarRepository;
         }
+        [AllowAnonymous]
         [Route("api/Calendar/isDateRangeAvailable")]
         [HttpGet]
         public bool isDateRangeAvailable(DateTime startDate, DateTime endDate)
         {
             return _calendarRepository.isDateRangeAvailable(startDate, endDate);
+        }
+        [AllowAnonymous]
+        [Route("api/Calendar/isDateAvailable")]
+        [HttpGet]
+        public bool isDateAvailable(DateTime date)
+        {
+            return _calendarRepository.isDateAvailable(date);
+        }
+
+        [AllowAnonymous]
+        [Route("api/Calendar/getBookedDates")]
+        [HttpGet]
+        public List<DateTime> getBokkedDates()
+        {
+            return _calendarRepository.getAllBookedDates();
         }
     }
 }
