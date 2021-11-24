@@ -3,8 +3,6 @@ import './Calendar.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
-import Button from '@material-ui/core/button'
-import Grid from '@material-ui/core/Grid';
 import deLocale from 'moment/locale/de';
 
 import { DayPickerRangeController, DateRangePicker } from 'react-dates';
