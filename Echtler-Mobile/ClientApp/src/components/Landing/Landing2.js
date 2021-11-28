@@ -8,8 +8,7 @@ function Landing2() {
     return (
         <div>
         <header className="masthead">
-        <div className= "logo1">
-              </div>
+        <div className= "logo1"> </div>
                 <div className="intro-text container">
                 {/*<div className="intro-heading text-uppercase">Mit dem Wohnmobil auf neuen Wegen!</div>*/}
                 <div className="intro-heading text-uppercase">Ihr Partner für Wohnmobile im Allgäu</div>
