@@ -8,7 +8,7 @@ function Footer() {
 
     return (
         <>
-        
+            <hr></hr>
             <Grid container spacing={2}>
                 <Grid item xs={false} sm={2}></Grid>
                 <Grid item container xs={12} sm={8} spacing={2} >
