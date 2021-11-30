@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
+
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -53,11 +57,16 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+string _pfx = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, builder.Configuration["IdentityServer:Key:FilePath"]);
+string _pw = builder.Configuration["IdentityServer:Key:Password"];
+
+
 builder.Services.AddIdentityServer(options =>
 {
-    options.IssuerUri = "https://localhost:44412/";
-})
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+    options.IssuerUri = builder.Configuration["IssuerURI"];
+})  .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+    .AddSigningCredential(new X509Certificate2(_pfx, _pw));
+
 
 builder.Services.AddScoped<IWohnmobilRepository, WohnmobilRepository>();
 builder.Services.AddScoped<IBuchungRepository, BuchungRepository>();
@@ -72,7 +81,13 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-app.UseSwaggerUI();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
+    app.UseSwaggerUI();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
