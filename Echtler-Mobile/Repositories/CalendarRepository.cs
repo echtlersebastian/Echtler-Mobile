@@ -30,8 +30,9 @@ namespace Echtler_Mobile.Repositories
         public List<DateTime> getAllBookedDates()
         {
             //Todo: Check if bookings can overlap
-            //Todo: What happens, if i have 2 Wohnmobils?
-            var allBookings = _context.Buchungen.Where(x => x.EndDate <= DateTime.Now.AddYears(2)) ;
+
+            var allBookings = _context.Buchungen.Where(x => x.EndDate <= DateTime.Now.AddYears(3)) ;
+            int WomoCount = _context.Wohnmobile.Count();
             var bookedDates = new List<DateTime>();
 
             foreach (Buchung b in allBookings)
@@ -41,7 +42,21 @@ namespace Echtler_Mobile.Repositories
                     bookedDates.Add(dt.Date);
                 }
             }
-            return bookedDates.Distinct().ToList() ;
+            //here i have all booked dates from all Wohnmobils. 
+            //i need to check, if a booked date appears {Wohnmobile.Count} times in the List. Becuase then it is truely not available
+            var unavailableDates = new List<DateTime>();
+
+            foreach(DateTime date in bookedDates)
+            {
+                var bookingsOnThisDay = bookedDates.Where(x => x == date).ToList();
+                if (bookingsOnThisDay.Count >= WomoCount)
+                {
+                    unavailableDates.Add(date);
+                }
+            }
+
+
+            return unavailableDates.Distinct().ToList() ;
         }
         public bool isDateRangeAvailable(DateTime startdate, DateTime enddate)
         {
