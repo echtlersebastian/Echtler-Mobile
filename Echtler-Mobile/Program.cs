@@ -64,7 +64,7 @@ string _pw = builder.Configuration["IdentityServer:Key:Password"];
 builder.Services.AddIdentityServer(options =>
 {
     options.IssuerUri = builder.Configuration["IssuerURI"];
-})  .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+}).AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
     .AddSigningCredential(new X509Certificate2(_pfx, _pw));
 
 

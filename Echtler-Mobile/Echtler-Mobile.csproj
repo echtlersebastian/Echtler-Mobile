@@ -13,6 +13,10 @@
     <RootNamespace>Echtler_Mobile</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+    <UserSecretsId>4efa5e6a-f3ff-40f8-9969-def9b979079a</UserSecretsId>
+    <DelaySign>False</DelaySign>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +41,12 @@
 
   <ItemGroup>
     <Folder Include="Properties\ServiceDependencies\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="echtlermobile.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
