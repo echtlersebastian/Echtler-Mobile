@@ -29,10 +29,10 @@ function PriceListCard() {
                         <Card style={cardStyle} elevation={8}>
                             <CardHeader align="center" gutterBottom title="Nebensaison"></CardHeader>
                             <CardContent>
-                                <Typography align="center" gutterBottom variant="h4">99€ pro Tag</Typography>
+                                <Typography align="center" gutterBottom variant="h4">99€ pro Nacht</Typography>
 
-                                <Typography align="center" variant="h6">19.03.21 - 25.03.21</Typography>
-                                <Typography align="center" variant="h6">04.10.21 - 29.10.21</Typography>
+                                <Typography align="center" variant="h6">18.03.22 - 01.04.22</Typography>
+                                <Typography align="center" variant="h6">08.10.22 - 29.10.22</Typography>
                             </CardContent>
                         </Card>
                     </Grid>
@@ -41,10 +41,10 @@ function PriceListCard() {
                         <Card style={cardStyle} elevation={8}>
                             <CardHeader align="center" gutterBottom title="Zwischensaison"></CardHeader>
                             <CardContent >
-                                <Typography align="center" gutterBottom variant="h4">119€ pro Tag</Typography>
-                                <Typography align="center" variant="h6">26.03.21 - 20.05.21</Typography>
-                                <Typography align="center" variant="h6">07.06.21 - 02.07.21</Typography>
-                                <Typography align="center" variant="h6">06.09.21 - 03.10.21</Typography>
+                                <Typography align="center" gutterBottom variant="h4">125€ pro Nacht</Typography>
+                                <Typography align="center" variant="h6">02.04.22 - 13.05.22</Typography>
+                                <Typography align="center" variant="h6">19.06.22 - 01.07.22</Typography>
+                                <Typography align="center" variant="h6">10.09.22 - 07.10.22</Typography>
                             </CardContent>
                         </Card>
                     </Grid>
@@ -53,10 +53,9 @@ function PriceListCard() {
                         <Card style={cardStyle} elevation={8}>
                             <CardHeader align="center" gutterBottom title="Hauptsaison"></CardHeader>
                             <CardContent>
-                                <Typography align="center" gutterBottom variant="h4">139€ pro Tag</Typography>
-                                <Typography align="center" variant="h6">21.05.21 - 06.06.21</Typography>
-                                <Typography align="center" variant="h6">03.07.21 - 12.08.21</Typography>
-                                <Typography align="center" variant="h6">28.08.21 - 05.09.21</Typography>
+                                <Typography align="center" gutterBottom variant="h4">139€ pro Nacht</Typography>
+                                <Typography align="center" variant="h6">14.05.22 - 18.06.22</Typography>
+                                <Typography align="center" variant="h6">02.07.22 - 10.09.22</Typography>
                             </CardContent>
                         </Card>
                     </Grid>

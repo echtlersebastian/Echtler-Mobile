@@ -60,14 +60,7 @@ function Extras() {
                         <Grid item xs={false} md={3}></Grid>
                         <Grid item xs={12} md={6}>
 
-                            <Card className={classes.root} variant="outlined" >
-                                <CardMedia
-                                    className={classes.media}
-                                    image={image}
-                                    title="Ausstattung"
-                                />
-
-                            </Card>
+                      
                         </Grid>
                         <Grid item xs={false} md={3}></Grid>
 

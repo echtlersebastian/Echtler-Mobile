@@ -56,7 +56,7 @@ class Calendar extends Component {
 
         if (this.state.screenWidth >= 1600) {
             this.setState({ monthCount: 3 });
-        } else if (this.state.screenWidth >= 1000) {
+        } else if (this.state.screenWidth >= 800) {
             this.setState({ monthCount: 2 });
         } else if (this.state.screenWidth >= 600) {
             this.setState({ monthCount: 1 });
@@ -91,7 +91,11 @@ class Calendar extends Component {
     render() {
         return (
             <>
-                <DayPickerRangeController
+                <br />
+                <h1 style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>Hier die Verf&uuml;gbarkeit pr&uuml;fen:</h1>
+                <br />
+
+                <DayPickerRangeController style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                     onDatesChange={this.handleDateChange}
                     focusedInput={this.state.focusedInput}
                     onFocusChange={this.handleFocusChange}

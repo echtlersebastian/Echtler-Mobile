@@ -20,7 +20,10 @@ export default class App extends Component {
 
   render () {
     return (
-      <Layout>
+        <Layout>
+            <head>
+                <meta charset="utf-8" />
+                    </head>
         <Route exact path='/' component={Home} />
             <Route path="/Wohnmobile" exact component={Wohnmobile} />
             <Route path="/Preisliste" exact component={PriceList} />
