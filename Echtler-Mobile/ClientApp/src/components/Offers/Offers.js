@@ -40,7 +40,7 @@ function Offers() {
             analytics: '/Packliste'
         },
         {
-            title: 'Preisliste 2021',
+            title: 'Preisliste 2022',
             caption: 'Unser aktuelles Angebot für Sie!',
             image: PreislistePortfolioBild,
             analytics: '/Preisliste'
