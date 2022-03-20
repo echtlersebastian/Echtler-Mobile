@@ -2,11 +2,14 @@ using Echtler_Mobile.Data;
 using Echtler_Mobile.Models;
 using Echtler_Mobile.Repositories;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +20,36 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
-
-
-
 builder.Services.AddEndpointsApiExplorer();
+
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["jwt:Audience"],
+            ValidIssuer = builder.Configuration["jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:Key"]))
+        };
+    });
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Echtler-Mobile-Api Documentation", Version = "v1" });
@@ -30,6 +59,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
         Scheme = "Bearer"
     });
 
@@ -42,11 +72,7 @@ builder.Services.AddSwaggerGen(c =>
               {
                 Type = ReferenceType.SecurityScheme,
                 Id = "Bearer"
-              },
-              Scheme = "oauth2",
-              Name = "Bearer",
-              In = ParameterLocation.Header,
-
+              }
             },
             new List<string>()
           }
@@ -54,27 +80,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-string _pfx = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, builder.Configuration["IdentityServer:Key:FilePath"]);
-string _pw = builder.Configuration["IdentityServer:Key:Password"];
-
-
-builder.Services.AddIdentityServer(options =>
-{
-    options.IssuerUri = builder.Configuration["IssuerURI"];
-}).AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
-    .AddSigningCredential(new X509Certificate2(_pfx, _pw));
-
-
 builder.Services.AddScoped<IWohnmobilRepository, WohnmobilRepository>();
 builder.Services.AddScoped<IBuchungRepository, BuchungRepository>();
 builder.Services.AddScoped<IPricingSeasonRepository, PricingSeasonRepository>();
 builder.Services.AddScoped<ICalendarRepository, CalendarRepository>();
 
-builder.Services.AddAuthentication()
-    .AddIdentityServerJwt();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -107,7 +117,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
