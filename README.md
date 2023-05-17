@@ -1,3 +1,8 @@
+# Update 2023
+Unforuntately Echtler-Mobile is out of business. I learned so much during this Project and i am really grateful for the opporunity. 
+Its always sad, when a project dies, but this also is the best Opportunity to start something great! It was a pleasure!
+
+
 # 🚙 Echtler-Mobile 🚙
 Azure Website: [Echtler Mobile](https://echtler-mobile.de) 
 Swagger Page:  [Swagger](https://echtler-mobile.de/swagger)
